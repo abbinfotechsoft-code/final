@@ -1,394 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>web-spider | Digital Growth Studio</title>
-<meta name="description" content="web-spider — digital growth support, campaign services, and website design for businesses in India and worldwide.">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="web-spider | Digital Growth Studio">
-<meta property="og:description" content="web-spider — digital growth support, campaign services, and website design for businesses in India and worldwide.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23f46d48'/%3E%3Cellipse cx='24' cy='29' rx='7' ry='7' fill='%2328263d'/%3E%3Cpath d='M12 20c0-6.8 5.4-12 12-12s12 5.2 12 12' stroke='%2328263d' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M19 17 14 13' stroke='%2328263d' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M29 17 34 13' stroke='%2328263d' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-/* minimal reset (replaces Tailwind preflight) */
-*,::before,::after{box-sizing:border-box;border:0 solid}
-html{line-height:1.5;-webkit-text-size-adjust:100%}
-body{margin:0;-webkit-font-smoothing:antialiased}
-h1,h2,h3,p{margin:0} h1,h2,h3{font-size:inherit;font-weight:inherit}
-a{color:inherit;text-decoration:inherit}
-svg{display:block;vertical-align:middle}
-button,input,select,textarea{font:inherit;color:inherit;margin:0}
-button{background:transparent;padding:0;cursor:pointer}
-textarea{resize:vertical}
-::placeholder{color:currentColor;opacity:.5}
-nav a{display:inline}
-html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-body { margin: 0; background: #f3f0e7; color: #25233b; font-family: 'Manrope', sans-serif; }
-* { box-sizing: border-box; }
-button, input, textarea, select { font: inherit; }
-::selection { background: #b9e5d6; color: #25233b; }
-.site-shell { overflow: hidden; position: relative; }
-.site-shell::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 20; opacity: .13; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2325233b' stroke-opacity='.25' stroke-width='.8'%3E%3Cpath d='M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180M49 0 180 131M0 49 131 180M0 90h180M90 0v180'/%3E%3C/g%3E%3C/svg%3E"); background-size: 220px 220px; }
-.container { width: min(1160px, calc(100% - 56px)); margin-inline: auto; }
-.topbar { height: 82px; display:flex; align-items:center; border-bottom: 1px solid rgba(37,35,59,.13); position:relative; z-index:30; }
-.nav-inner { display:flex; justify-content:space-between; align-items:center; width:100%; }
-.brand { display:flex; align-items:center; gap:11px; text-decoration:none; color:#25233b; font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; letter-spacing:-.7px; }
-.brand-mark { width:37px; height:37px; display:grid; place-items:center; border-radius:50%; background:radial-gradient(circle at 32% 27%,#ff9a79,#f46d48 72%); color:#25233b; box-shadow:inset 0 1px rgba(255,255,255,.28),0 10px 20px rgba(244,109,72,.18); }
-.brand-mark svg { width:27px; height:27px; overflow:visible; filter:drop-shadow(0 1px 1px rgba(37,35,59,.18)); }
-.nav-links { display:flex; gap:34px; align-items:center; }
-.nav-links a { color:#575466; text-decoration:none; font-size:12px; font-weight:700; transition:color .2s; }
-.nav-links a:hover { color:#f46d48; }
-.nav-cta,.button-primary { display:inline-flex; align-items:center; justify-content:center; gap:10px; border:0; border-radius:999px; padding:14px 20px; color:#f7f3e9; background:#28263d; text-decoration:none; font-size:12px; font-weight:800; letter-spacing:-.15px; transition:transform .2s, background .2s, color .2s, box-shadow .2s; }
-.nav-cta:hover,.button-primary:hover { background:#f46d48; color:#28263d; transform:translateY(-2px); }
-.button-primary svg,.nav-cta svg { width:15px; height:15px; }
-.menu-toggle { display:none; background:transparent; border:0; color:#25233b; cursor:pointer; }
-.hero { min-height:690px; display:grid; grid-template-columns:1.03fr .97fr; align-items:center; padding:64px 0 82px; position:relative; }
-.hero-copy { position:relative; z-index:2; }
-.eyebrow { display:inline-flex; align-items:center; gap:9px; color:#615f70; font:500 10px 'DM Mono',monospace; letter-spacing:1.4px; text-transform:uppercase; }
-.eyebrow-dot { width:8px; height:8px; border-radius:50%; background:#f46d48; box-shadow:0 0 0 4px rgba(244,109,72,.15); }
-.hero h1 { max-width:680px; margin:24px 0 20px; font:600 clamp(54px,7vw,90px)/.99 'Space Grotesk',sans-serif; letter-spacing:-6px; }
-.hero h1 em { color:#f46d48; font-style:normal; }
-.hero-lede { max-width:460px; margin:0; color:#656273; font-size:15px; line-height:1.85; }
-.hero-actions { display:flex; gap:15px; align-items:center; margin-top:29px; }
-.text-link { display:inline-flex; align-items:center; gap:8px; color:#25233b; font-size:12px; font-weight:800; text-decoration:none; }
-.text-link svg { width:15px; transition:transform .2s; }
-.text-link:hover svg { transform:translateX(4px); }
-.hero-note { margin-top:55px; display:flex; align-items:center; gap:12px; color:#747181; font:11px 'DM Mono',monospace; }
-.hero-note::before { content:''; width:39px; height:1px; background:#f46d48; }
-.hero-art { min-height:500px; display:grid; place-items:center; position:relative; }
-.orbit { position:absolute; width:min(440px,87%); aspect-ratio:1; border:1px solid rgba(37,35,59,.16); border-radius:50%; }
-.orbit::before,.orbit::after { content:''; position:absolute; border:1px dashed rgba(37,35,59,.18); border-radius:50%; inset:32px; }
-.orbit::after { inset:76px; border-style:solid; opacity:.5; }
-.hero-disc { position:absolute; width:300px; height:300px; border-radius:50%; background:#b8e4d5; }
-.hero-art-card { position:absolute; width:210px; background:#f9f6ed; border:1px solid rgba(37,35,59,.14); padding:17px; box-shadow:8px 11px 0 rgba(37,35,59,.08); }
-.hero-art-card.top { top:53px; right:3px; transform:rotate(5deg); }
-.hero-art-card.bottom { bottom:49px; left:5px; transform:rotate(-5deg); }
-.mini-label { color:#858292; font:9px 'DM Mono',monospace; letter-spacing:1px; text-transform:uppercase; }
-.mini-row { display:flex; align-items:center; justify-content:space-between; margin-top:13px; font-size:11px; font-weight:800; }
-.mini-bars { display:flex; gap:5px; align-items:end; height:40px; margin-top:8px; }
-.mini-bars i { width:13px; border-radius:3px 3px 0 0; background:#f46d48; }
-.mini-bars i:nth-child(1){height:45%}.mini-bars i:nth-child(2){height:67%}.mini-bars i:nth-child(3){height:54%}.mini-bars i:nth-child(4){height:100%}.mini-bars i:nth-child(5){height:78%;background:#b8e4d5}.mini-bars i:nth-child(6){height:60%}
-.web-lines { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-.web-lines path { fill:none; stroke:rgba(37,35,59,.23); stroke-width:1; }
-.mascot { width:230px; height:260px; position:relative; z-index:1; animation:mascot-bob 4.8s ease-in-out infinite; }
-.mascot svg { width:100%; height:100%; overflow:visible; }
-.mascot-shadow { position:absolute; width:130px; height:16px; border-radius:50%; background:rgba(37,35,59,.13); bottom:6px; left:50%; transform:translateX(-50%); filter:blur(5px); animation:shadow-breathe 4.8s ease-in-out infinite; }
-.float-tag { position:absolute; z-index:2; padding:10px 13px; background:#f46d48; color:#25233b; font:500 10px 'DM Mono',monospace; transform:rotate(-6deg); left:54%; top:28%; }
-.section-kicker { color:#f46d48; font:500 10px 'DM Mono',monospace; letter-spacing:1.5px; text-transform:uppercase; }
-.section-title { max-width:680px; margin:14px 0 0; font:600 clamp(38px,5vw,60px)/1.08 'Space Grotesk',sans-serif; letter-spacing:-3px; }
-.section-intro { max-width:470px; color:#716e7e; font-size:14px; line-height:1.8; }
-.services-section { background:#28263d; color:#f3f0e7; padding:104px 0 110px; position:relative; }
-.services-section::after { content:'S'; position:absolute; right:-12px; top:-66px; font:700 400px/.9 'Space Grotesk',sans-serif; color:rgba(255,255,255,.025); pointer-events:none; }
-.services-heading { display:flex; justify-content:space-between; gap:40px; align-items:end; margin-bottom:56px; position:relative; z-index:1; }
-.services-heading .section-title { color:#f3f0e7; max-width:540px; }
-.services-heading .section-intro { color:#b3b0bf; margin-bottom:3px; }
-.service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; position:relative; z-index:1; }
-.service-card { min-height:246px; border:1px solid rgba(243,240,231,.17); padding:24px 23px 21px; position:relative; isolation:isolate; overflow:hidden; background:rgba(255,255,255,.025); transition:transform .2s, background .2s, border-color .2s; }
-.service-card:hover { transform:translateY(-5px); background:rgba(255,255,255,.065); }
-.service-number { font:10px 'DM Mono',monospace; color:#9e9bac; }
-.service-icon { width:40px; height:40px; display:grid; place-items:center; border:1px solid rgba(243,240,231,.23); border-radius:50%; margin:23px 0 16px; color:#b8e4d5; }
-.service-icon svg { width:18px; }
-.service-card h3 { margin:0 0 8px; font:600 20px 'Space Grotesk',sans-serif; letter-spacing:-.5px; }
-.service-card p { max-width:290px; margin:0; color:#b3b0bf; font-size:12px; line-height:1.75; }
-.service-card .card-arrow { position:absolute; right:21px; top:23px; color:#f46d48; }
-.service-card .card-arrow svg { width:15px; }
-.approach-section { padding:112px 0; position:relative; }
-.approach-layout { display:grid; grid-template-columns:.9fr 1.1fr; gap:110px; align-items:start; position:relative; z-index:1; }
-.approach-sticky { position:sticky; top:100px; }
-.approach-sticky .section-title { max-width:450px; }
-.approach-sticky p { color:#716e7e; font-size:14px; line-height:1.8; max-width:390px; }
-.approach-list { border-top:1px solid rgba(37,35,59,.18); }
-.approach-item { display:grid; grid-template-columns:64px 1fr; padding:27px 0; border-bottom:1px solid rgba(37,35,59,.18); position:relative; overflow:hidden; isolation:isolate; }
-.approach-item .step { color:#f46d48; font:500 11px 'DM Mono',monospace; padding-top:4px; }
-.approach-item h3 { margin:0 0 9px; font:600 22px 'Space Grotesk',sans-serif; letter-spacing:-.6px; }
-.approach-item p { margin:0; color:#716e7e; font-size:12px; line-height:1.8; max-width:420px; }
-.ethics-band { background:#b8e4d5; padding:30px 0; position:relative; overflow:hidden; }
-.ethics-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; position:relative; z-index:1; }
-.ethics-mark { width:54px; height:54px; border:1px solid rgba(37,35,59,.32); border-radius:50%; display:grid; place-items:center; flex:none; }
-.ethics-mark svg { width:23px; }
-.ethics-copy { flex:1; }
-.ethics-copy h3 { margin:0 0 4px; font:600 18px 'Space Grotesk',sans-serif; }
-.ethics-copy p { margin:0; font-size:12px; color:#565367; line-height:1.7; max-width:660px; }
-.ethics-label { font:500 9px 'DM Mono',monospace; letter-spacing:1px; text-transform:uppercase; color:#565367; }
-.contact-section { background:#f46d48; padding:102px 0 94px; position:relative; overflow:hidden; }
-.contact-section::before { content:''; position:absolute; width:580px; height:580px; border:1px solid rgba(37,35,59,.18); border-radius:50%; right:-150px; top:-180px; box-shadow:0 0 0 48px rgba(37,35,59,.04); }
-.contact-layout { display:grid; grid-template-columns:1fr .86fr; gap:90px; position:relative; z-index:1; }
-.contact-title { max-width:620px; margin:14px 0 19px; font:600 clamp(46px,6vw,76px)/.98 'Space Grotesk',sans-serif; letter-spacing:-5px; }
-.contact-copy > p { max-width:430px; color:rgba(37,35,59,.75); font-size:14px; line-height:1.85; }
-.contact-detail { display:flex; gap:12px; align-items:center; margin-top:35px; font-size:11px; font-weight:800; }
-.contact-detail svg { width:18px; }
-.inquiry-card { padding:26px; background:#f3f0e7; border:1px solid rgba(37,35,59,.18); box-shadow:9px 10px 0 rgba(37,35,59,.12); }
-.inquiry-card h3 { margin:0 0 6px; font:600 21px 'Space Grotesk',sans-serif; }
-.inquiry-card > p { margin:0 0 22px; color:#716e7e; font-size:11px; line-height:1.65; }
-.field-label { display:block; margin:14px 0 6px; color:#4c495d; font:500 9px 'DM Mono',monospace; letter-spacing:.7px; text-transform:uppercase; }
-.inquiry-card input,.inquiry-card textarea,.inquiry-card select { width:100%; padding:12px 13px; background:#faf8f1; border:1px solid #d9d5ca; border-radius:0; color:#25233b; outline:none; font-size:14px; }
-.inquiry-card input:focus,.inquiry-card textarea:focus,.inquiry-card select:focus { border-color:#f46d48; box-shadow:0 0 0 3px rgba(244,109,72,.15); }
-.inquiry-card textarea { min-height:86px; resize:vertical; }
-.inquiry-card .button-primary { margin-top:17px; width:100%; border-radius:2px; }
-.form-note { margin-top:13px; color:#777483; font-size:10px; line-height:1.6; }
-.draft-result { margin-top:16px; padding:14px; border-left:3px solid #b8e4d5; background:#e7e5dc; }
-.draft-result p { margin:0 0 10px; font-size:11px; line-height:1.7; }
-.email-open-button { margin-top:5px; border-radius:2px; }
-.footer { background:#28263d; color:#f3f0e7; padding:29px 0; position:relative; overflow:hidden; }
-.footer-inner { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; position:relative; z-index:1; }
-.footer .brand { color:#f3f0e7; }
-.footer p { justify-self:center; margin:0; color:#b3b0bf; font-size:10px; text-align:center; }
-.footer-nav { display:flex; justify-self:end; gap:22px; }
-.footer-nav a { color:#cfccd6; font-size:10px; text-decoration:none; }
-.footer-nav a:hover { color:#f46d48; }
-.roaming-spider { position:fixed; left:8vw; top:13vh; z-index:25; width:44px; height:58px; pointer-events:none; }
-.roaming-spider svg { width:100%; height:100%; overflow:visible; filter:drop-shadow(0 5px 4px rgba(37,35,59,.15)); animation:spider-sway 2.4s ease-in-out infinite; }
-.roaming-string { position:absolute; width:1px; height:34px; background:rgba(37,35,59,.4); top:-34px; left:50%; }
-@keyframes mascot-bob { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-11px) rotate(2deg)} }
-@keyframes shadow-breathe { 0%,100%{transform:translateX(-50%) scaleX(1);opacity:.8}50%{transform:translateX(-50%) scaleX(.78);opacity:.5} }
-@keyframes spider-sway { 0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(4px)} }
-@media (max-width:850px) {
- .container{width:min(100% - 40px,680px)} .hero{grid-template-columns:1fr; padding-top:75px; gap:12px}.hero-art{min-height:440px}.hero h1{max-width:600px}
- .services-heading{display:block}.services-heading .section-intro{margin-top:16px}.service-grid{grid-template-columns:repeat(2,1fr)}
- .approach-layout{grid-template-columns:1fr;gap:46px}.approach-sticky{position:static}.contact-layout{grid-template-columns:1fr;gap:42px}
-}
-@media (max-width:620px) {
- .container{width:calc(100% - 36px)} .topbar{height:70px}.brand{font-size:15px}.nav-cta{display:none}.menu-toggle{display:grid;place-items:center;width:40px;height:40px}
- .nav-links{display:none;position:absolute;top:69px;left:0;right:0;padding:19px 20px 22px;background:#f3f0e7;border-bottom:1px solid rgba(37,35,59,.15);flex-direction:column;align-items:flex-start;gap:12px;z-index:30}
- .nav-links.open{display:flex}.nav-links a{font-size:13px}.hero{min-height:auto;padding:63px 0 58px}.hero h1{font-size:clamp(53px,14vw,77px);letter-spacing:-4px}.hero-lede{font-size:13px}.hero-actions{flex-direction:column;align-items:flex-start}.hero-note{margin-top:32px}.hero-art{min-height:370px}.hero-disc{width:230px;height:230px}.mascot{width:185px;height:215px}.hero-art-card{width:162px;padding:12px}.hero-art-card.top{right:-3px;top:33px}.hero-art-card.bottom{left:-4px;bottom:25px}.service-card .card-arrow{display:none}
- .services-section{padding:75px 0 78px}.services-heading{margin-bottom:34px}.section-title{letter-spacing:-2px}.service-grid{grid-template-columns:1fr;gap:9px}.service-card{min-height:205px;padding:20px 18px}.approach-section{padding:78px 0}.approach-item{grid-template-columns:45px 1fr;padding:22px 0}.approach-item h3{font-size:19px}
- .ethics-inner{align-items:flex-start;flex-wrap:wrap}.ethics-label{margin-left:66px}.contact-section{padding:76px 0 70px}.contact-title{letter-spacing:-3px}.inquiry-card{padding:20px}
- .footer-inner{display:flex;align-items:center;flex-direction:column}.footer-nav{justify-self:auto;gap:17px}
-}
-@media (prefers-reduced-motion: reduce) {
- *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .cursor-spider{display:none}
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>web-spider | Digital Growth Studio</title>
+  <meta name="description" content="Digital growth studio for businesses in India and worldwide." />
+  <style>
+    :root {
+      --bg: #f3f0e7;
+      --panel: #ffffff;
+      --text: #25233b;
+      --muted: #5a5869;
+      --accent: #f46d48;
+      --dark: #28263d;
+      --green: #b8e4d5;
+      --line: rgba(37,35,59,0.14);
+    }
 
-.spider-web { position:absolute; z-index:0; width:170px; height:170px; fill:none; stroke:currentColor; stroke-width:1; pointer-events:none; }
-.spider-web path { transition:stroke .25s,stroke-width .25s; }
-.spider-web[data-lit="true"] { opacity:.98!important; color:var(--web-glow,#f6bf58); filter:drop-shadow(0 0 3px currentColor) drop-shadow(0 0 11px currentColor); }
-.web-hero { top:8px; left:8px; width:96px; height:96px; color:#f46d48; --web-glow:#b8e4d5; opacity:.2; }
-.web-services { top:18px; right:20px; color:#f3f0e7; opacity:.17; }
-.web-card { right:12px; bottom:10px; width:88px; height:88px; color:#b8e4d5; --web-glow:#b8e4d5; opacity:.14; }
-.service-card > .service-number,.service-card > .service-icon,.service-card > h3,.service-card > p { position:relative; z-index:1; }
-.service-card > .card-arrow { z-index:1; }
-.web-approach { top:36px; right:5%; color:#f46d48; opacity:.21; }
-.approach-item > .step,.approach-item > div:last-child { position:relative; z-index:1; }
-.web-step { right:4px; top:50%; width:78px; height:78px; color:#f46d48; --web-glow:#f46d48; opacity:.13; transform:translateY(-50%); }
-.web-ethics { right:30px; top:-34px; width:138px; height:138px; color:#25233b; opacity:.15; }
-.web-contact { right:20px; bottom:20px; width:196px; height:196px; color:#25233b; opacity:.13; }
-.web-footer { right:12px; bottom:-35px; width:124px; height:124px; color:#b8e4d5; --web-glow:#b8e4d5; opacity:.18; }
-.cursor-spider { left:0; top:0; width:44px; height:58px; opacity:0; transform:translate3d(var(--cursor-x,-100px),var(--cursor-y,-100px),0); transition:transform .12s cubic-bezier(.2,.75,.3,1),opacity .12s ease; }
-.cursor-spider[data-active="true"] { opacity:.88; }
-@media (max-width:850px), (hover:none), (pointer:coarse) {
-  .cursor-spider { display:none; }
-}
-.whatsapp-float { position:fixed; right:22px; bottom:20px; z-index:35; display:flex; align-items:center; gap:10px; padding:11px 16px; border:1px solid rgba(255,255,255,.48); border-radius:999px; background:linear-gradient(180deg,#2fcc72,#1ba25f); color:#fff; box-shadow:0 18px 32px rgba(31,130,78,.28); transition:transform .2s ease, box-shadow .2s ease, background .2s ease; }
-.whatsapp-float:hover { transform:translateY(-3px); background:#168b50; box-shadow:0 12px 32px rgba(22,70,44,.34); }
-.whatsapp-float:focus-visible { outline:3px solid #25233b; outline-offset:4px; }
-.whatsapp-float > svg { width:26px; height:26px; flex:none; }
-.whatsapp-float-label { display:flex; flex-direction:column; gap:2px; }
-.whatsapp-float-label strong { font:700 12px 'Manrope',sans-serif; }
-.whatsapp-float-label small { font:500 9px 'DM Mono',monospace; opacity:.9; }
-@media (max-width:620px) {
-  .whatsapp-float { right:14px; bottom:14px; gap:8px; padding:10px 13px; }
-  .whatsapp-float > svg { width:23px; height:23px; }
-  .whatsapp-float-label strong { font-size:11px; }
-  .whatsapp-float-label small { font-size:8px; }
-}
-
-</style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(243,240,231,0.92);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1.05rem;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 30%, #ff9a79, #f46d48 70%);
+      color: var(--text);
+      font-weight: 900;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent); color: var(--dark); }
+    .btn-soft {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .btn-soft:hover { border-color: var(--accent); color: var(--accent); }
+    .hero {
+      padding: 72px 0 70px;
+    }
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 32px;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(244, 109, 72, 0.08);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(2.8rem, 5vw, 6rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+    h1 .accent { color: var(--accent); }
+    .lead {
+      max-width: 610px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .hero-card {
+      background: #f9f6ed;
+      border: 1px solid var(--line);
+      box-shadow: 8px 10px 0 rgba(37,35,59,0.08);
+      padding: 24px 22px;
+      border-radius: 20px;
+      max-width: 340px;
+      margin-left: auto;
+    }
+    .small-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      font-weight: 800;
+    }
+    .bars {
+      display: flex;
+      align-items: end;
+      gap: 6px;
+      height: 52px;
+      margin-top: 12px;
+    }
+    .bars span {
+      display: block;
+      width: 14px;
+      border-radius: 6px 6px 0 0;
+      background: var(--accent);
+    }
+    .bars span:nth-child(1){height: 35%}
+    .bars span:nth-child(2){height: 60%}
+    .bars span:nth-child(3){height: 46%}
+    .bars span:nth-child(4){height: 100%}
+    .bars span:nth-child(5){height: 68%; background: var(--green)}
+    .bars span:nth-child(6){height: 56%}
+    .cta-strip {
+      background: var(--dark);
+      color: #f3f0e7;
+      padding: 24px 0;
+    }
+    .cta-strip .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .cta-strip strong {
+      font-size: 1.1rem;
+      letter-spacing: -0.04em;
+    }
+    .contact-panel {
+      background: linear-gradient(180deg, #f9f6ed 0%, #f3f0e7 100%);
+      border-top: 1px solid var(--line);
+      padding: 72px 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: center;
+    }
+    .contact-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 8px 10px 0 rgba(37,35,59,0.07);
+    }
+    .contact-box h2 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+    .contact-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .contact-item .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(244,109,72,0.08);
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-box small {
+      display: block;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .footer {
+      background: var(--dark);
+      color: #f3f0e7;
+      padding: 18px 0 28px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer p {
+      margin: 0;
+      color: rgba(243,240,231,0.8);
+      font-size: 0.78rem;
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero-wrap, .contact-grid { grid-template-columns: 1fr; }
+      .hero-card { margin-left: 0; }
+      .footer-inner { justify-content: center; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-<main class="site-shell">
-<div class="roaming-spider cursor-spider" id="cursor-spider" aria-hidden="true"><span class="roaming-string"></span><svg viewBox="0 0 120 140" role="img" aria-label="Spider mascot moving across the page"><g fill="none" stroke="#28263d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M60 18c-10 0-17 8-17 18s7 17 17 17 17-7 17-17-7-18-17-18Z"/><path d="M37 28c-10 9-13 19-12 30M83 28c10 9 13 19 12 30M46 50q14 7 28 0M48 54 33 92M72 54 87 92M33 92 17 122M87 92 103 122M54 64 42 116M66 64 78 116M48 98 38 122M72 98 82 122"/></g></svg></div>
-<a href="https://wa.me/919582938090?text=Namaste%20web-spider%2C%20mujhe%20apni%20website%20ke%20liye%20help%20chahiye." class="whatsapp-float" aria-label="Chat on WhatsApp with web-spider" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M19.11 16.76c-.2-.1-1.18-.58-1.37-.65-.19-.06-.33-.1-.47.1-.14.2-.54.65-.66.78-.12.14-.24.15-.44.05-.2-.1-.84-.31-1.59-.99-.59-.52-1-1.16-1.12-1.36-.12-.2-.01-.31.09-.4.09-.09.2-.24.3-.36.1-.12.13-.2.2-.34.07-.14.03-.26-.02-.36-.05-.1-.47-1.12-.64-1.54-.17-.4-.34-.36-.47-.36h-.4c-.14 0-.36.05-.55.26-.19.21-.72.7-.72 1.7 0 1 .74 1.96.84 2.1.1.14 1.42 2.17 3.44 3.04.48.2.85.33 1.14.43.48.15.92.13 1.27.08.39-.06 1.18-.48 1.34-.94.16-.46.16-.85.11-.94-.05-.08-.18-.14-.38-.24ZM16.01 2.67C8.76 2.67 2.8 8.54 2.8 15.7c0 2.17.57 4.26 1.66 6.11L2.67 29.33l7.82-2.58a12.97 12.97 0 0 0 5.52 1.19c7.24 0 13.2-5.87 13.2-13.12 0-7.25-5.96-13.13-13.2-13.13Zm0 23.92c-1.62 0-3.2-.43-4.59-1.26l-.33-.2-4.64 1.53 1.56-4.52-.22-.37a10.87 10.87 0 0 1-1.7-5.62c0-6.02 4.95-10.92 11.03-10.92 6.08 0 11.03 4.9 11.03 10.92 0 6.03-4.95 10.92-11.03 10.92Z"/></svg><span class="whatsapp-float-label"><strong>WhatsApp</strong><small>9582938090</small></span></a>
-<header class="topbar"><div class="container nav-inner">
-<a class="brand" href="#home" aria-label="web-spider home"><span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="#28263d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c-7.4 0-13 5.7-13 13 0 2.5.8 4.8 2.1 6.7l-2.1 8.3 8.1-2.2A12.9 12.9 0 0 0 24 34c7.3 0 13-5.8 13-13S31.3 8 24 8Z"/><path d="M21 15l-4.5-5M27 15l4.5-5M17 23h14M18 28h12"/></g></svg></span><span>web-spider</span></a>
-<nav class="nav-links" id="nav" aria-label="Main navigation"><a href="#services">What we do</a><a href="#approach">How we work</a><a href="#values">Our promise</a></nav>
-<a href="#contact" class="nav-cta">Let’s talk <svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a>
-<button class="menu-toggle" id="menu" aria-label="Open navigation" aria-expanded="false"><span id="ic-menu"><svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span><span id="ic-x" hidden><svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></span></button>
-</div></header>
-<section class="container hero" id="home">
-<div class="hero-copy">
-<div class="eyebrow"><span class="eyebrow-dot"></span> Independent digital growth studio</div>
-<h1>Reach the right people. <em>Grow</em> your way.</h1>
-<p class="hero-lede">A small, hands-on marketing team for Indian businesses ready to show up better online. Thoughtful campaigns, useful websites, and a real person in your corner.</p>
-<div class="hero-actions"><a class="button-primary" href="#contact">Tell us what you need <svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a><a class="text-link" href="#services">See what we do <svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a></div>
-<div class="hero-note">Small team. Straight answers. Work that feels like you.</div>
-</div>
-<div class="hero-art" aria-label="Spider mascot among connected growth channels">
-<svg class="spider-web web-hero" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg>
-<svg class="web-lines" viewBox="0 0 500 500" aria-hidden="true"><path d="M250 249 80 125M250 249 424 114M250 249 444 335M250 249 93 391M250 249 250 32M250 249 250 473"/><path d="M170 111q81-65 162 0t0 138q-81 65-162 0t0-138Z"/><path d="M160 172q90-44 180 0M135 248q115-53 230 0M174 328q76 42 152 0"/></svg>
-<div class="hero-art-card top"><div class="mini-label">A better connection</div><div class="mini-row"><span>Right message</span><svg class="i" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></div><div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-<div class="hero-art-card bottom"><div class="mini-label">Your digital web</div><div class="mini-row"><span>Made around you</span><svg class="i" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></div><div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-<div class="mascot"><svg viewBox="0 0 120 140" role="img" aria-label="Spider Marketing mascot"><g fill="none" stroke="#28263d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M60 18c-10 0-17 8-17 18s7 17 17 17 17-7 17-17-7-18-17-18Z"/><path d="M37 28c-10 9-13 19-12 30M83 28c10 9 13 19 12 30M46 50q14 7 28 0M48 54 33 92M72 54 87 92M33 92 17 122M87 92 103 122M54 64 42 116M66 64 78 116M48 98 38 122M72 98 82 122"/></g></svg></div>
-<div class="mascot-shadow" aria-hidden="true"></div>
-<div class="float-tag">small team, big heart</div>
-</div>
-</section>
-<section class="services-section" id="services"><svg class="spider-web web-services" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg>
-<div class="container">
-<div class="services-heading"><div><div class="section-kicker">What we can help with</div><h2 class="section-title">Your next step, not a one-size-fits-all package.</h2></div><p class="section-intro">From sharper messaging to a stronger online presence, every service is built to help you attract better-fit buyers and turn attention into action.</p></div>
-<div class="service-grid"><article class="service-card" data-testid="card-service-01"><svg class="spider-web web-card" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg><div class="service-number">01</div><div class="service-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6.5A2.5 2.5 0 0 1 6.5 4H18a2 2 0 0 1 2 2v10.5"/><path d="M4 18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M8 9h8M8 13h8"/></svg></div><h3>Website direction</h3><p>Clearer brand story, tighter messaging, and pages built with real sales intent rather than just good-looking visuals.</p><span class="card-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></article>
-<article class="service-card" data-testid="card-service-02"><div class="service-number">02</div><div class="service-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M6 15l3-6 4 5 5-9"/></svg></div><h3>Campaign strategy</h3><p>Lead generation, social growth, and ad ideas that stay useful to your business goals and not just your vanity metrics.</p><span class="card-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></article>
-<article class="service-card" data-testid="card-service-03"><div class="service-number">03</div><div class="service-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V8l8-4v10"/><path d="M8 18v2"/><path d="M16 14v4"/><path d="M5 18h14"/></svg></div><h3>Landing pages</h3><p>Focused pages for offers, launches, and service explains—designed to point the right people toward the next step.</p><span class="card-arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></article></div>
-</div></section>
-<section class="approach-section" id="approach"><svg class="spider-web web-approach" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg>
-<div class="container approach-layout">
-<div class="approach-sticky"><div class="section-kicker">A simple way forward</div><h2 class="section-title">Good work starts with a good conversation.</h2><p>No jargon, no pressure. Just a small team that listens first, spots the gap, and helps you move with clarity.</p></div>
-<div class="approach-list"><article class="approach-item"><div class="step">01</div><div><h3>Listen closely</h3><p>We learn what matters to your business, your audience, and the growth goals you can realistically sustain.</p></div></article><article class="approach-item"><svg class="spider-web web-step" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg><div class="step">02</div><div><h3>Find the actual need</h3><p>Sometimes the fix is a better offer, a cleaner funnel, or a more useful website — not more noise.</p></div></article><article class="approach-item"><div class="step">03</div><div><h3>Build with purpose</h3><p>We shape the work around your real audience and service approach so it feels polished, practical, and easy to trust.</p></div></article><article class="approach-item"><div class="step">04</div><div><h3>Keep it moving</h3><p>You get clear updates, honest feedback, and systems that help your business keep growing without getting tangled.</p></div></article></div>
-</div></section>
-<section class="ethics-band" id="values"><svg class="spider-web web-ethics" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg><div class="container ethics-inner"><div class="ethics-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="8"/></svg></div><div class="ethics-copy"><div class="ethics-label">Our promise</div><h3>Useful work, not inflated promises.</h3><p>We keep things straightforward, practical, and aligned with your business. Better websites and stronger customer connection should feel human — not complicated.</p></div></div></section>
-<section class="contact-section" id="contact"><svg class="spider-web web-contact" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg>
-<div class="container contact-layout">
-<div class="contact-copy"><div class="section-kicker" style="color:#3e3c52">Your business has a next chapter</div><h2 class="contact-title">Let’s make it easier to find you.</h2><p>Tell us where you’re stuck, what you want to grow, or where your current online presence is feeling weak. We’ll help you decide the next right move.</p><div class="contact-detail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-11Z"/><path d="m5 7 7 6 7-6"/></svg><span>abbinfotechsoft@gmail.com</span></div></div>
-<div><form class="inquiry-card" id="inquiry">
-<h3>Chaliye, baat shuru karein.</h3><p>Details bhariye; email app mein aapka message taiyar ho jayega.</p>
-<label class="field-label" for="inquiry-name">Your name</label><input id="inquiry-name" name="name" placeholder="What should we call you?" required>
-<label class="field-label" for="inquiry-email">Email address</label><input id="inquiry-email" type="email" name="email" placeholder="you@example.com" required>
-<label class="field-label" for="inquiry-phone">Phone number</label><input id="inquiry-phone" type="tel" name="phone" autocomplete="tel" placeholder="+91 98765 43210" required>
-<label class="field-label" for="inquiry-service">What are you looking for?</label><select id="inquiry-service" name="service" required><option value="" disabled selected>Choose a service</option><option value="Website design">Website design</option><option value="Marketing support">Marketing support</option><option value="Landing page">Landing page</option><option value="Brand clarity">Brand clarity</option><option value="Campaign strategy">Campaign strategy</option></select>
-<label class="field-label" for="inquiry-message">Description</label><textarea id="inquiry-message" name="message" placeholder="Tell us a little about what you need." required></textarea>
-<button type="submit" class="button-primary">Send inquiry by email <svg class="i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></button>
-<p class="form-note">Aapka email app khulega aur details pre-filled hongi. Email bhejne ke liye wahan Send dabayein.</p>
-<div class="draft-result" id="draft" aria-live="polite" hidden><p>Your email app should open. If it does not, <a id="draft-link" href="#" style="text-decoration:underline">open the prepared email</a>.</p><a id="draft-button" class="button-primary email-open-button" href="#">Open email draft</a></div>
-</form></div></div></section>
-<footer class="footer"><svg class="spider-web web-footer" viewBox="0 0 180 180" aria-hidden="true"><path d="M0 0 180 180M0 0 180 90M0 0 90 180M0 0h180M0 0v180"/><path d="M0 38c48 0 70 24 71 71M0 75c28 0 34 14 35 35M0 112c12 0 18 9 18 18M0 148c8 0 12 7 12 12M0 180h180M38 0c0 48 24 70 71 71M75 0c0 28 14 34 35 35M112 0c0 12 9 18 18 18M148 0c0 8 7 12 12 12M180 0v180"/></svg><div class="container footer-inner"><a class="brand" href="#home" aria-label="web-spider home"><span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="#f3f0e7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c-7.4 0-13 5.7-13 13 0 2.5.8 4.8 2.1 6.7l-2.1 8.3 8.1-2.2A12.9 12.9 0 0 0 24 34c7.3 0 13-5.8 13-13S31.3 8 24 8Z"/><path d="M21 15l-4.5-5M27 15l4.5-5M17 23h14M18 28h12"/></g></svg></span><span>web-spider</span></a><p>© 2025 web-spider. Built for people, not just brand noise.</p><nav class="footer-nav" aria-label="Footer navigation"><a href="#services">Services</a><a href="#approach">How we work</a><a href="#contact">Contact</a></nav></div></footer>
-</main>
-<script src="https://accounts.google.com/gsi/client"></script>
-<script>
-(function(){
-  var nav=document.getElementById('nav'),btn=document.getElementById('menu'),icM=document.getElementById('ic-menu'),icX=document.getElementById('ic-x');
-  function setMenu(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);btn.setAttribute('aria-label',o?'Close navigation':'Open navigation');icM.hidden=o;icX.hidden=!o;}
-  btn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
-  nav.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false);});
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="web-spider home">
+        <span class="brand-mark">W</span>
+        <span>web-spider</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#contact">Contact</a>
+        <a href="https://wa.me/919582938090?text=Namaste%20web-spider%2C%20mujhe%20help%20chahiye." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </nav>
+      <a class="btn btn-primary" href="#contact">Let’s talk</a>
+    </div>
+  </header>
 
-  var spider=document.getElementById('cursor-spider'),webs=[].slice.call(document.querySelectorAll('.spider-web'));
-  window.addEventListener('pointermove',function(e){
-    if(e.pointerType!=='mouse')return;
-    spider.style.setProperty('--cursor-x',(e.clientX+18)+'px');
-    spider.style.setProperty('--cursor-y',(e.clientY+16)+'px');
-    spider.dataset.active='true';
-    var sx=e.clientX+40,sy=e.clientY+45;
-    webs.forEach(function(w){var b=w.getBoundingClientRect();
-      var dx=Math.max(b.left-sx,0,sx-b.right),dy=Math.max(b.top-sy,0,sy-b.bottom);
-      w.dataset.lit=String(Math.hypot(dx,dy)<48);});
-  },{passive:true});
-  document.documentElement.addEventListener('pointerleave',function(){
-    spider.dataset.active='false';webs.forEach(function(w){w.dataset.lit='false';});
-  });
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div>
+          <span class="eyebrow">Digital growth studio</span>
+          <h1>Reach the right people.<br><span class="accent">Grow</span> your way.</h1>
+          <p class="lead">We help businesses show up better online with clear websites, focused digital strategy, and practical marketing that feels human.</p>
 
-  var GMAIL_CONFIG = {
-    projectId: 'service_iq4u55b',
-    targetEmail: 'abbinfotechsoft@gmail.com',
-    clientId: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
-    scopes: 'https://www.googleapis.com/auth/gmail.send'
-  };
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:abbinfotechsoft@gmail.com?subject=Website%20Inquiry">Email us</a>
+            <a class="btn btn-soft" href="https://wa.me/919582938090?text=Namaste%20web-spider%2C%20mujhe%20help%20chahiye." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+        </div>
 
-  function canUseGmailApi() {
-    return Boolean(
-      window.google &&
-      window.google.accounts &&
-      window.google.accounts.oauth2 &&
-      GMAIL_CONFIG.clientId &&
-      GMAIL_CONFIG.clientId.indexOf('YOUR_') === -1
-    );
-  }
+        <div class="hero-card" aria-label="Growth overview card">
+          <div class="small-label">Growth snapshot</div>
+          <div class="stat">
+            <span>Brand clarity</span>
+            <strong>+40%</strong>
+          </div>
+          <div class="bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="stat" style="margin-top:18px;">
+            <span>More leads</span>
+            <strong>Smart</strong>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  async function sendViaGmailApi(subject, body) {
-    if (!canUseGmailApi()) return false;
+    <div class="cta-strip">
+      <div class="container inner">
+        <strong>Need a website, campaign support, or a clearer digital plan?</strong>
+        <a class="btn btn-primary" href="mailto:abbinfotechsoft@gmail.com?subject=Website%20Inquiry">Send inquiry</a>
+      </div>
+    </div>
 
-    var accessToken = null;
-    var accessError = null;
-    var tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: GMAIL_CONFIG.clientId,
-      scope: GMAIL_CONFIG.scopes,
-      callback: function(tokenResponse) {
-        if (tokenResponse && tokenResponse.error) {
-          accessError = tokenResponse.error;
-          return;
-        }
-        accessToken = tokenResponse && tokenResponse.access_token ? tokenResponse.access_token : null;
-      }
-    });
+    <section class="contact-panel" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-box">
+          <small>Contact</small>
+          <h2>Let’s make it easier to find you.</h2>
+          <p class="lead" style="max-width:500px; margin-top:12px;">Tell us what you need and we’ll help you figure out the next right step — website, marketing, branding, or campaign support.</p>
 
-    await new Promise(function(resolve, reject) {
-      var timeoutId = setTimeout(function(){
-        reject(new Error('Gmail OAuth timed out. Please check your Google OAuth Client ID for project service_iq4u55b.'));
-      }, 30000);
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="icon">✉</div>
+              <a href="mailto:abbinfotechsoft@gmail.com?subject=Website%20Inquiry">abbinfotechsoft@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <div class="icon">✆</div>
+              <a href="https://wa.me/919582938090?text=Namaste%20web-spider%2C%20mujhe%20help%20chahiye." target="_blank" rel="noopener noreferrer">+91 95829 38090</a>
+            </div>
+          </div>
+        </div>
 
-      tokenClient.requestAccessToken({ prompt: 'consent' });
+        <div class="contact-box">
+          <small>Quick inquiry</small>
+          <h2 style="font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 8px;">Ask us anything</h2>
+          <p style="color: var(--muted); margin: 14px 0 18px;">Fill in your details and we’ll prepare the message for email.</p>
 
-      function poll() {
-        if (accessToken) {
-          clearTimeout(timeoutId);
-          resolve();
-          return;
-        }
-        if (accessError) {
-          clearTimeout(timeoutId);
-          reject(new Error(String(accessError)));
-          return;
-        }
-        setTimeout(poll, 150);
-      }
-      poll();
-    });
+          <form action="mailto:abbinfotechsoft@gmail.com" method="post" enctype="text/plain">
+            <div style="display:grid; gap:12px;">
+              <input type="text" name="Name" placeholder="Your name" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:#fff; font:inherit;" required />
+              <input type="email" name="Email" placeholder="Email address" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:#fff; font:inherit;" required />
+              <input type="tel" name="Phone" placeholder="Phone number" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:#fff; font:inherit;" required />
+              <textarea name="Message" rows="4" placeholder="Tell us what you need" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:#fff; resize:vertical; font:inherit;" required></textarea>
+              <button type="submit" class="btn btn-primary" style="width:100%;">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    var rawBody = [
-      'From: "Website Inquiry" <' + GMAIL_CONFIG.targetEmail + '>',
-      'To: ' + GMAIL_CONFIG.targetEmail,
-      'Subject: =?UTF-8?B?' + btoa(unescape(encodeURIComponent(subject))) + '?=',
-      'MIME-Version: 1.0',
-      'Content-Type: text/plain; charset=UTF-8',
-      'Content-Transfer-Encoding: base64',
-      '',
-      btoa(unescape(encodeURIComponent(body)))
-    ].join('\r\n');
-
-    var response = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + accessToken,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ raw: btoa(unescape(encodeURIComponent(rawBody))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '') })
-    });
-
-    if (!response.ok) {
-      throw new Error('Gmail API send failed.');
-    }
-
-    return true;
-  }
-
-  document.getElementById('inquiry').addEventListener('submit', async function(e){
-    e.preventDefault();
-    var d=new FormData(e.target),g=function(k){return String(d.get(k)||'').trim();};
-    var subject='Website inquiry: ' + g('service');
-    var body=['New website inquiry','','Name: '+g('name'),'Email: '+g('email'),'Phone: '+g('phone'),'Looking for: '+g('service'),'','Description:',g('message')].join('\n');
-    var href='mailto:' + GMAIL_CONFIG.targetEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    document.getElementById('draft-link').href=href;
-    document.getElementById('draft-button').href=href;
-    document.getElementById('draft').hidden=false;
-
-    try {
-      if (canUseGmailApi()) {
-        var sent = await sendViaGmailApi(subject, body);
-        if (sent) {
-          document.getElementById('draft-link').textContent = 'Gmail notification sent successfully';
-          document.getElementById('draft-button').textContent = 'Open Gmail';
-        }
-      }
-    } catch (error) {
-      console.warn('Gmail API notification failed, fallback mailto used.', error);
-    }
-
-    window.location.href = href;
-  });
-})();
-</script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand" aria-label="web-spider footer">
+        <span class="brand-mark" style="background: radial-gradient(circle at 30% 30%, #ff9a79, #f46d48 70%);">W</span>
+        <span>web-spider</span>
+      </div>
+      <p>© 2025 web-spider — Built to help businesses grow with clarity.</p>
+      <a class="btn btn-soft" href="https://wa.me/919582938090?text=Namaste%20web-spider%2C%20mujhe%20help%20chahiye." target="_blank" rel="noopener noreferrer" style="color:#fff; border-color: rgba(255,255,255,0.2);">WhatsApp</a>
+    </div>
+  </footer>
 </body>
 </html>
